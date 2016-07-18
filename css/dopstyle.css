@@ -1,0 +1,35 @@
+html, body{
+	height:100%;
+}
+ul {
+	list-style-type: none;
+}
+li {	
+	padding-bottom:5%;
+}
+.padding{
+	padding:2% 0%;
+}
+.paddingMenu{
+	padding-top:4%;
+}
+
+.mainContent{
+	padding:0 4%;
+	text-align: justify;	
+}
+.green{
+	color:green;
+}
+.red{
+	color:red;
+}
+.thumbnail{
+	margin-bottom:10px;
+	text-align:center;
+}
+li {
+	display:inline-block;
+	margin-right: 5%;
+	text-align:center;
+}	

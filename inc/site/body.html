@@ -1,0 +1,116 @@
+<?php
+    require BASE_DIR.DIRECTORY_SEPARATOR.'inc'. DIRECTORY_SEPARATOR.'const.php'
+?>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+    <title><?php echo $constant['pageTitle']?></title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dopstyle.css" rel="stylesheet">
+    <script src="/js/jquery-1.10.2.js"></script>
+    <script src="/js/jquery-ui-1.11.4.js"></script>
+    <script>
+    $(function() {
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
+    });
+    function getContent($id){
+        $.ajax({
+                type:"post",
+                url:"inc/getContent.php",
+                datatype:"text",
+                data:"id="+$id,
+                success: function(data){
+                    $("#content").html(data);
+                }
+            })
+        };
+    function on($id){
+        $.ajax({
+                type: "POST",
+                url: "inc/on.php",
+                datatype: "text",
+                data: "id="+$id,
+                success: function(html){
+                    $("#menu").html(html);
+            }
+        });
+    };
+    function off($id){
+        $.ajax({
+                type: "POST",
+                url: "inc/off.php",
+                datatype: "text",
+                data: "id="+$id,
+                success:  function(html){
+                    $("#menu").html(html);
+            },
+        });
+    };
+    </script>
+</head>
+<body>
+<!--
+<div class='container'>
+-->
+<div class='padding'>
+    <div class="col-md-12">
+        <p class='text-center'>
+            <?php echo $constant['pageTitle']?>
+            <br>
+            <br>
+            <strong>
+                <a href="<?php echo $returnArray['link']?>">
+                    <?php echo $returnArray['pageTitle']?>
+                </a>
+            </strong>
+        </p>
+    </div>
+    <br>
+    <div class='row'>
+        <div class="col-md-10">
+            <div class='mainContent'>
+                <div id='menu'>
+                    <div id='sortable'>
+                        <?php
+                            include $returnArray['menu'];
+                           ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <p>
+                <a href='<?php echo $returnArray['linkTo']?>'>
+                    <?=$returnArray['title']?>
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="col-md-offset-1 col-md-9">
+            <div class='mainContent'>
+                <div class="col-md-10">
+                    <div id='content'>
+                        <?php include $returnArray['content']?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="navbar-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container text-center">
+            <div id='footer'>
+                Всего городов: <?php include $returnArray['footer']?>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+</div>
+-->
+</body>
+</html>
